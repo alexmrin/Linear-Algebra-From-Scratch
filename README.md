@@ -13,7 +13,7 @@ Implementing techniques and concepts from this textbook
 Let $S = A^TA$ where $A$ has linearly independent columns, be a symmetric positive definite matrix. We need this to be the case because 
 if we multiply out the Cholesky Decomposition, we find that we must divide certain terms by the diagonal elements. Positive semidefinite
 means that for any nonzero vector $x$, $x^TA^TAx \geq 0$, which simplifies to $(Ax)^T(Ax) \geq 0$. This is also the dot product of vector $Ax$
-with itself. we know that this dot product can equal 0 whenever $x$ is in the nullspace of $A$, which will give us $(0)^T(0) = 0$.
+with itself. we know that this dot product can equal $0$ whenever $x$ is in the nullspace of $A$, which will give us $(0)^T(0) = 0$.
 Choosing one of the standard basis vectors as x, we can get a diagonal term of $S$. If one of the standard basis vectors happen to be in
 the nullspace of $A$, this results in the diagonal term of $S$ becoming $0$, which will cause an error due to division by $0$.
 
