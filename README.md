@@ -1,12 +1,13 @@
 # Math-for-ML
-Practicing the math used in Machine Learning
+### Implementing math concepts taught in this book into code and summarizing important concepts and techniques
 
-https://course.ccs.neu.edu/ds4420sp20/readings/mml-book.pdf
+**The [textbook](https://course.ccs.neu.edu/ds4420sp20/readings/mml-book.pdf) used to study**
 
-Implementing techniques and concepts from this textbook
+# ________________________________________________________
 
 
-**Cholesky Decomposition**
+
+### Cholesky Decomposition
 
 *The Cholesky Decomposition decomposes a symmetric positive definite matrix into a lower triangular matrix and its transpose*
 
