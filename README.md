@@ -3,8 +3,21 @@
 
 **The [textbook](https://course.ccs.neu.edu/ds4420sp20/readings/mml-book.pdf) used to study**
 
+## Table of Contents
+- [Projections](#projections)
+- [Cholesky Decomposition](#cholesky-decomposition)
+
 # ______________________________________
 
+
+
+### Projections
+
+*Projections are a unique type of linear mapping where applying a projection to a vector twice is equal to applying it once.*
+
+Let $V$ be a vector space and $U \subseteq V$ be a subspace of $V$. A linear mapping $\pi : V \rightarrow U$ is a projection if $\pi^{2} = \pi$.
+
+Let us look at how the math behind projections work. we will assume that $(\mathbf{b_1}, \dots, \mathbf{b_m})$ is an ordered basis of $U$. The projection $\pi_U(\textbf{x})$ is the projection of $\textbf{x}$ onto $U$. We want to minimize the distance between $\textbf{x}$ and $\pi_U(\textbf{x})$, meaning that $[\textbf{x} -  \pi_U(\textbf{x})]$ will be orthogonal to every basis vector in $U$. Using the dot product as the inner product, we get $$\langle \mathbf{x} -  \pi_U(\mathbf{x}), \mathbf{b_1} \rangle = \mathbf{b_1}^T(\mathbf{x} -  \pi_U(\mathbf{x})) = \mathbf{0}$$ $$\vdots$$ $$\langle \mathbf{x} -  \pi_U(\mathbf{x}), \mathbf{b_m} \rangle = \mathbf{b_m}^T(\mathbf{x} -  \pi_U(\mathbf{x})) = \mathbf{0}$$ Since we know $\pi_U(\mathbf{x}) \in U$, we can rewrite $\pi_U(\mathbf{x})$ as a linear combination of the basis vectors of $U$. $$\pi_U(\mathbf{x}) = \lambda_1\mathbf{b_1} + \dots + \lambda_m\mathbf{b_m} = \sum_{i=1}^m \lambda_i\mathbf{b_i}$$ Letting $\mathbf{\lambda} = [\lambda_1, \dots, \lambda_m]^T$ and $\mathbf{B} = [\mathbf{b_1}, \dots, \mathbf{b_m}]$, we can simplify $\pi_U(\mathbf{x})$ to
 
 
 ### Cholesky Decomposition
