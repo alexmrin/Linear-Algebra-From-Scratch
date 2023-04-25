@@ -25,6 +25,7 @@ def determinant(a):
         det *= l[i][i] ** 2
     return det
 
+'''
 # columns linearly independent matrix A
 A = np.array([4, 5, 2, 3, 5, 1, 19, 17, 3]).reshape(3, 3)
 
@@ -40,4 +41,4 @@ print(l)
 
 print("The determinant of your matrix is")
 print(determinant(S))
-
+'''
