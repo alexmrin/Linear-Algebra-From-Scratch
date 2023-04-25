@@ -5,6 +5,7 @@
 
 ## Table of Contents
 - [Projections](#projections)
+- [Gram-Schmidt Orthogonalization](#gram-schmidt-orthogonalization)
 - [Cholesky Decomposition](#cholesky-decomposition)
 
 # ______________________________________
