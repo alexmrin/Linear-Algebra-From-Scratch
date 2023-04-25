@@ -1,8 +1,7 @@
 # Math-for-ML
 ### Implementing math concepts taught in this book into code and summarizing important concepts and techniques
 
-**The [textbook](https://course.ccs.neu.edu/ds4420sp20/readings/mml-book.pdf) used to study, all theorems and derivations from this book**
-
+**The [textbook](https://course.ccs.neu.edu/ds4420sp20/readings/mml-book.pdf) used to study**
 ## Table of Contents
 - [Projections](#projections)
 - [Gram-Schmidt Orthogonalization](#gram-schmidt-orthogonalization)
