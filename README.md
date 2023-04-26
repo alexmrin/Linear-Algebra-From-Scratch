@@ -6,6 +6,8 @@
 - [Projections](#projections)
 - [Gram-Schmidt Orthogonalization](#gram-schmidt-orthogonalization)
 - [Cholesky Decomposition](#cholesky-decomposition)
+- [Diagonalization](#diagonalization)
+- [Eigendecomposition](#eigendecomposition)
 
 # ______________________________________
 
@@ -20,7 +22,7 @@ Let $V$ be a vector space and $U \subseteq V$ be a subspace of $V$. A linear map
 Let us look at how the math behind projections work. we will assume that $(\mathbf{b_1}, \dots, \mathbf{b_m})$ is an ordered basis of $U$. The projection $\pi_U(\textbf{x})$ is the projection of $\textbf{x}$ onto $U$. We want to minimize the distance between $\textbf{x}$ and $\pi_U(\textbf{x})$, meaning that the vector $(\textbf{x} -  \pi_U(\textbf{x}))$ will be orthogonal to every basis vector in $U$. Using the dot product as the inner product, we get $$\langle \mathbf{x} -  \pi_U(\mathbf{x}), \mathbf{b_1} \rangle = \mathbf{b_1}^T(\mathbf{x} -  \pi_U(\mathbf{x})) = \mathbf{0}$$ $$\vdots$$ $$\langle \mathbf{x} -  \pi_U(\mathbf{x}), \mathbf{b_m} \rangle = \mathbf{b_m}^T(\mathbf{x} -  \pi_U(\mathbf{x})) = \mathbf{0}$$ Since we know $\pi_U(\mathbf{x}) \in U$, we can rewrite $\pi_U(\mathbf{x})$ as a linear combination of the basis vectors of $U$. $$\pi_U(\mathbf{x}) = \lambda_1\mathbf{b_1} + \dots + \lambda_m\mathbf{b_m} = \sum_{i=1}^m \lambda_i\mathbf{b_i}$$ Letting $\mathbf{\lambda} = [\lambda_1, \dots, \lambda_m]^T$ and $\mathbf{B} = [\mathbf{b_1}, \dots, \mathbf{b_m}]$, we get $\pi_U(\mathbf{x}) = \mathbf{B\lambda}$. Substituting, we now have $$\mathbf{b_1}^T(\mathbf{x} -  \mathbf{B\lambda}) = \mathbf{0}$$ $$\vdots$$ $$\mathbf{b_m}^T(\mathbf{x} -  \mathbf{B\lambda}) = \mathbf{0}$$ This is simply a simultaneous homogenous equation that can be written as: $$\mathbf{B}^T(\mathbf{x} -  \mathbf{B\lambda}) = \mathbf{0}$$ Note that $\mathbf{x}$ and $\mathbf{B\lambda}$ are both vectors so by the linear property of matrices, we expand into $$\mathbf{B}^T\mathbf{x} = \mathbf{B}^T\mathbf{B\lambda}$$ We are solving for the coordinates with respect to the subspace $U$, $\lambda$. Since $\mathbf{B}$ has linearly independent columns, $\mathbf{B}^T\mathbf{B}$ is invertible (see [appendix](#appendix) for details). Therefore, $$\mathbf{\lambda} = (\mathbf{B}^T\mathbf{B})^{-1}\mathbf{B}^T\mathbf{x}$$ Since $\pi_U(\textbf{x}) = \mathbf{B\lambda}$, we finally get $$\pi_U(\textbf{x}) = \mathbf{B}(\mathbf{B}^T\mathbf{B})^{-1}\mathbf{B}^T\mathbf{x}$$ The projection matrix $\mathbf{P_{\pi}}$ follows as $$\mathbf{P_{\pi}} = \mathbf{B}(\mathbf{B}^T\mathbf{B})^{-1}\mathbf{B}^T$$ This matrix will allow us to project any vector $\mathbf{x}$ in $\mathbf{R^n}$ and project it to any subspace $U$, using its basis vectors $\mathbf{b_1}, \dots, \mathbf{b_m}$. The intuition behind its property to stay invariant under multiple transformations is that once a vector $\mathbf{x}$ is projected onto $U$, $\mathbf{P_{{\pi}}x} \in U$. When we apply the projection again, the closest vector in $U$ to $\mathbf{P_{{\pi}}x}$ is itself so we simply project to $\mathbf{P_{{\pi}}x}$ again.
 
 One thing to note is that when $\bf{B}$ are an orthonormal basis, $\bf{B}$ will be an orthogonal matrix, meaning that $\bf{B}^T\bf{B} = I$. This simplifies our projection matrix to be $$\mathbf{P_{\pi}} = \mathbf{B}\mathbf{B}^T$$
-<br><br><br><br>
+<br><br><br>
 
 ### Gram-Schmidt Orthogonalization
 
@@ -30,7 +32,7 @@ Given any set of basis vectors $(\mathbf{b_1}, \dots, \mathbf{b_m})$, we can ite
 If we want to turn $(\mathbf{u_1}, \dots, \mathbf{u_m})$ into an orthonormal basis ($\lvert\mathbf{u_k}\rvert=1$), we can simply normalize each vector $\mathbf{u_k}$ as follows: $$\hat{\mathbf{u_k}} = \frac{\mathbf{u_k}}{\lvert\mathbf{u_k}\rvert}$$
 
 
-<br><br><br><br>
+<br><br><br>
 ### Cholesky Decomposition
 
 *The Cholesky Decomposition decomposes a symmetric positive definite matrix into a lower triangular matrix and its transpose.*
@@ -39,7 +41,28 @@ Let $\mathbf{S} = \mathbf{A}^T\mathbf{A}$ where $A$ has linearly independent col
 
 A reason why the Cholesky Decomposition is useful is it speeds up the calculation of determinants. Since $\mathbf{S} = \mathbf{LL}^T$, $$det(\mathbf{S}) = det(\mathbf{L}) * det(\mathbf{L}^T)$$ We know that for a triangular matrix, the determinant can be calculated by multiplying the diagonal terms of the matrix. Since $det(\mathbf{L}) = det(\mathbf{L}^T)$, we can say $$det(\mathbf{S}) = det(\mathbf{L})^2$$ Therefore the determinant of $\mathbf{S}$ can be calculated by multiplying the square of the diagonal terms on its triangular matrix.
 
-<br><br><br><br>
+<br><br><br>
+### Diagonalization
+
+*Diagonal matrices are matrices will nonzero entries on its diagonal and zeros everywhere else. They are very useful for certain operations such as squaring the matrix, finding its inverse, or calculating its determinant.*
+
+Obviously, most matrices you see will not be in a diagonal form. However, there are special matrices that can be turned into a diagonal matrix. More specifically these matrices are ***similar*** to diagonal matrix. A matrix $\bf{A}$ is similar to diagonal matrix $\bf{D}$ if there exists matrix $\bf{P} \in \bf{R^{nxn}}$ where $$\bf{D} = \bf{P}^{-1}\bf{AP}$$ In other words, $\bf{A}$ must be written as a change of basis to $\bf{D}$. Omitting the proof, In order for a matrix $\bf{A}$ to be diagonalizable, the columns of $\bf{P}$, $[\mathbf{p_1}, \dots, \mathbf{p_m}]$ must be the *linearly independent* eigenvectors of $\bf{A}$, and the entries of $\bf{D}$ are its corresponding eigenvalues $\lambda_i$. This tells us that matrix $\bf{A}$ must be ***nondefective*** meaning that it has $n$ linearly independent eigenvectors. Otherwise, $\bf{P}$ will not be full rank, meaning that it would not be invertible.
+
+<br><br><br>
+### Eigendecomposition
+
+*Eigendecomposition decomposes a nondefective matrix into a matrix with eigenvectors as its columns, the inverse, and a diagonal matrix with its eigenvalues as entries.*
+
+A direct result of diagonalization is that we can write a nondefective matrix $\bf{A}$ in terms of three simpler matrices. $$\bf{D} = \bf{P}^{-1}\bf{AP} \Longleftrightarrow \bf{PD} = \bf{AP} \Longleftrightarrow \bf{A} = \bf{PD}\bf{P}^{-1}$$ Recall that $[\mathbf{p_1}, \dots, \mathbf{p_m}]$ are the eigenvectors of $\bf{A}$, and $\bf{D}$ is a diagonal matrix with corresponding eigenvalues ${\lambda_i}$. <br>
+For a nondefective matrix, we will have $n$ linearly dependent eigenvectors that are a basis for $R^n$. Using Gram-Schmidt Orthogonalization, we can always turn those eigenvectors into an orthonormal basis. Once $\bf{P}$ is an orthogonal matrix we can simplify to $$\bf{A} = \bf{PD}\bf{P}^{T}$$
+
+Now I will explain an intuitive approach to eigendecomposition. For easier understanding, I will let $\bf{P}$ be an orthogonal matrix. Whenever we see a series of matrices being multiplied to each other, we can think of it as a series of linear transformations being applied from the standard basis one after another from right to left. Starting from the rightmost transformation, $\bf{P}^T = \bf{P}^{-1}$, this matrix takes the eigenvectors of $\bf{A}$, and rotates them to align with the standard basis. Once our eigenvectors are aligned with the standard basis, we will multiply by the diagonal matrix of eigenvalues. Due to the properties of diagonal matrices, the transformation will only affect each basis vector, and scale them by a factor of its corresponding eigenvalues. Now that our eigenvectors are properly scaled, we will rotate them back to their respective positions by multiplying by $\bf{P}$.
+
+We know that eigendecomposition only works for nondefective matrices. From the spectral theorem, we know that for a symmetrical matrix, its ***basis vectors can always be written as a set of orthonormal eigenvectors***. Therefore, ***any symmetric matrix has an eigendecomposition***.
+
+
+
+<br><br><br>
 ## Appendix
 
 If $\mathbf{B}$ has linearly independent columns, $\mathbf{B}^T\mathbf{B}$ is invertible. <br>
