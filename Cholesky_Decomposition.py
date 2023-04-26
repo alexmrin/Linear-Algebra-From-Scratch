@@ -16,7 +16,7 @@ def cholesky(a):
                     temp_l -= l[i][count] * l[j][count]
                 l[i][j] = temp_l / l[j][j]
 
-    return l
+    return l, np.transpose(l)
 
 def determinant(a):
     det = 1
@@ -34,7 +34,7 @@ S = np.dot(np.transpose(A), A)
 print(A)
 print(S)
 
-l = cholesky(S)
+l, l_t = cholesky(S)
 
 print("Your decomposed lower triangular matrix is")
 print(l)
