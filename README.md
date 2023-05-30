@@ -8,6 +8,7 @@
 - [Cholesky Decomposition](#cholesky-decomposition)
 - [Diagonalization](#diagonalization)
 - [Eigendecomposition](#eigendecomposition)
+- [Singular Value Decomposition](#singular-value-decomposition)
 
 # ______________________________________
 
@@ -33,15 +34,17 @@ If we want to turn $(\mathbf{u_1}, \dots, \mathbf{u_m})$ into an orthonormal bas
 
 
 <br><br><br>
+
 ### Cholesky Decomposition
 
 *The Cholesky Decomposition decomposes a symmetric positive definite matrix into a lower triangular matrix and its transpose.*
 
-Let $\mathbf{S} = \mathbf{A}^T\mathbf{A}$ where $A$ has linearly independent columns, be a symmetric positive definite matrix. We need this to be the case because if we multiply out the Cholesky Decomposition, we find that we must divide certain terms by the diagonal elements. Positive semidefinite means that for any nonzero vector $\mathbf{x}$, $$\mathbf{x}^T\mathbf{A}^T\mathbf{Ax} \geq 0$$ which simplifies to $$(\mathbf{Ax})^T(\mathbf{Ax}) \geq 0$$ This is also the dot product of vector $\mathbf{Ax}$ with itself. We know that this dot product can equal $0$ whenever $\mathbf{x}$ is in the nullspace of $\mathbf{A}$, which will give us $(\mathbf{0})^T(\mathbf{0}) = 0$. Choosing one of the standard basis vectors as $\mathbf{x}$, we can get a diagonal term of $\mathbf{S}$. If one of the standard basis vectors happen to be in the nullspace of $\mathbf{A}$, this results in the diagonal term of $\mathbf{S}$ becoming $\mathbf{0}$, which will cause an error due to division by $0$.
+Let $\mathbf{S} = \mathbf{A}^T\mathbf{A}$ where $\bf{A}$ has linearly independent columns, be a symmetric positive definite matrix. We need this to be the case because if we multiply out the Cholesky Decomposition, we find that we must divide certain terms by the diagonal elements. Positive semidefinite means that for any nonzero vector $\mathbf{x}$, $$\mathbf{x}^T\mathbf{A}^T\mathbf{Ax} \geq 0$$ which simplifies to $$(\mathbf{Ax})^T(\mathbf{Ax}) \geq 0$$ This is also the dot product of vector $\mathbf{Ax}$ with itself. We know that this dot product can equal $0$ whenever $\mathbf{x}$ is in the nullspace of $\mathbf{A}$, which will give us $(\mathbf{0})^T(\mathbf{0}) = 0$. Choosing one of the standard basis vectors as $\mathbf{x}$, we can get a diagonal term of $\mathbf{S}$. If one of the standard basis vectors happen to be in the nullspace of $\mathbf{A}$, this results in the diagonal term of $\mathbf{S}$ becoming $\mathbf{0}$, which will cause an error due to division by $0$.
 
 A reason why the Cholesky Decomposition is useful is it speeds up the calculation of determinants. Since $\mathbf{S} = \mathbf{LL}^T$, $$det(\mathbf{S}) = det(\mathbf{L}) * det(\mathbf{L}^T)$$ We know that for a triangular matrix, the determinant can be calculated by multiplying the diagonal terms of the matrix. Since $det(\mathbf{L}) = det(\mathbf{L}^T)$, we can say $$det(\mathbf{S}) = det(\mathbf{L})^2$$ Therefore the determinant of $\mathbf{S}$ can be calculated by multiplying the square of the diagonal terms on its triangular matrix.
 
 <br><br><br>
+
 ### Diagonalization
 
 *Diagonal matrices are matrices will nonzero entries on its diagonal and zeros everywhere else. They are very useful for certain operations such as squaring the matrix, finding its inverse, or calculating its determinant.*
@@ -49,16 +52,27 @@ A reason why the Cholesky Decomposition is useful is it speeds up the calculatio
 Obviously, most matrices you see will not be in a diagonal form. However, there are special matrices that can be turned into a diagonal matrix. More specifically these matrices are ***similar*** to diagonal matrix. A matrix $\bf{A}$ is similar to diagonal matrix $\bf{D}$ if there exists matrix $\bf{P} \in \bf{R^{nxn}}$ where $$\bf{D} = \bf{P}^{-1}\bf{AP}$$ In other words, $\bf{A}$ must be written as a change of basis to $\bf{D}$. Omitting the proof, In order for a matrix $\bf{A}$ to be diagonalizable, the columns of $\bf{P}$, $[\mathbf{p_1}, \dots, \mathbf{p_m}]$ must be the *linearly independent* eigenvectors of $\bf{A}$, and the entries of $\bf{D}$ are its corresponding eigenvalues $\lambda_i$. This tells us that matrix $\bf{A}$ must be ***nondefective*** meaning that it has $n$ linearly independent eigenvectors. Otherwise, $\bf{P}$ will not be full rank, meaning that it would not be invertible.
 
 <br><br><br>
+
 ### Eigendecomposition
 
 *Eigendecomposition decomposes a nondefective matrix into a matrix with eigenvectors as its columns, the inverse, and a diagonal matrix with its eigenvalues as entries.*
 
 A direct result of diagonalization is that we can write a nondefective matrix $\bf{A}$ in terms of three simpler matrices. $$\bf{D} = \bf{P}^{-1}\bf{AP} \Longleftrightarrow \bf{PD} = \bf{AP} \Longleftrightarrow \bf{A} = \bf{PD}\bf{P}^{-1}$$ Recall that $[\mathbf{p_1}, \dots, \mathbf{p_m}]$ are the eigenvectors of $\bf{A}$, and $\bf{D}$ is a diagonal matrix with corresponding eigenvalues ${\lambda_i}$. <br>
-For a nondefective matrix, we will have $n$ linearly dependent eigenvectors that are a basis for $R^n$. Using Gram-Schmidt Orthogonalization, we can always turn those eigenvectors into an orthonormal basis. Once $\bf{P}$ is an orthogonal matrix we can simplify to $$\bf{A} = \bf{PD}\bf{P}^{T}$$
+From the spectral theorem, we know that for a symmetrical matrix, its ***eigenspaces corresponding to distinct eigenvalues are orthogonal***. Using Gram-Schmidt Orthogonalization, we can always turn those eigenvectors into an orthonormal basis. Once $\bf{P}$ is an orthogonal matrix we can simplify to $$\bf{A} = \bf{PD}\bf{P}^{T}$$Therefore, ***any symmetric matrix has an eigendecomposition of an orthogonal eigenbasis***. 
 
 Now I will explain an intuitive approach to eigendecomposition. For easier understanding, I will let $\bf{P}$ be an orthogonal matrix. Whenever we see a series of matrices being multiplied to each other, we can think of it as a series of linear transformations being applied from the standard basis one after another from right to left. Starting from the rightmost transformation, $\bf{P}^T = \bf{P}^{-1}$, this matrix takes the eigenvectors of $\bf{A}$, and rotates them to align with the standard basis. Once our eigenvectors are aligned with the standard basis, we will multiply by the diagonal matrix of eigenvalues. Due to the properties of diagonal matrices, the transformation will only affect each basis vector, and scale them by a factor of its corresponding eigenvalues. Now that our eigenvectors are properly scaled, we will rotate them back to their respective positions by multiplying by $\bf{P}$.
 
-We know that eigendecomposition only works for nondefective matrices. From the spectral theorem, we know that for a symmetrical matrix, its ***basis vectors can always be written as a set of orthonormal eigenvectors***. Therefore, ***any symmetric matrix has an eigendecomposition***.
+<br><br><br>
+
+### Singular Value Decomposition
+
+*Singular Value Decomposition (SVD) decomposes any mxn matrix into three matrices: the left singular values, singular value, and right singular values.*
+
+Unlike the Cholensky Decomposition or Eigendecomposition, this decomposition is universal in the sense that we can apply it to any $m$x$n$ matrix. SVD is decomposed into $\bf{A} = \bf{U \Sigma V^T}$, where $\bf{U}$ is an $m$x$m$ orthogonal matrix, $\bf{V}$ is an $n$x$n$ orthogonal matrix, and $\bf{\Sigma}$ is an $m$x$n$ matrix with its diagonal values being the *singular values* of $\bf{A}$, and the remaining entries being $0$.
+
+For an intuitive idea of the SVD, we can imagine $\bf{V^T}$ as a rotation, turning the orthogonal eigenvectors of matrix $\bf{A}$ to align with the standard basis, much like Eigendecomposition. Now, instead of simply stretching or shrinking A by its corresponding eigenvalues, it also adds new dimensions/removes dimensions from A to map it onto $R^n$. Once this is done, we once again rotate the eigenvectors back to their respective directions, much like Eigendecomposition, completing the transformation.
+
+
 
 
 
