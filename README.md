@@ -1,4 +1,4 @@
-# Math-for-ML
+# Linear-Algebra-From-Scratch
 ### Implementing math concepts taught in this book into code and summarizing important concepts and techniques
 
 **The [textbook](https://course.ccs.neu.edu/ds4420sp20/readings/mml-book.pdf) used to study**
